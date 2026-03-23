@@ -43,4 +43,214 @@ body {
   .pixel-link-hover {
     @apply transition-all duration-150 hover:-translate-y-[2px] hover:shadow-pixel;
   }
+
+  .font-cn {
+    font-family:
+      var(--font-cn),
+      "PingFang SC",
+      "Microsoft YaHei",
+      "Noto Sans CJK SC",
+      sans-serif;
+  }
+}
+
+.mario-bg {
+  opacity: 0.33;
+}
+
+.mario-cloud-layer {
+  position: absolute;
+  left: -20%;
+  right: -20%;
+  display: flex;
+  gap: 5rem;
+  will-change: transform;
+}
+
+.mario-cloud-layer--slow {
+  top: 8%;
+  animation: marioScroll 32s linear infinite;
+}
+
+.mario-cloud-layer--fast {
+  top: 18%;
+  animation: marioScroll 20s linear infinite;
+}
+
+.mario-cloud {
+  position: relative;
+  width: 72px;
+  height: 26px;
+  border: 2px solid #2f2d2a;
+  background: #fffaf0;
+  box-shadow: 4px 4px 0 #1f1d1a;
+}
+
+.mario-cloud::before,
+.mario-cloud::after {
+  content: "";
+  position: absolute;
+  border: 2px solid #2f2d2a;
+  background: #fffaf0;
+}
+
+.mario-cloud::before {
+  width: 26px;
+  height: 22px;
+  left: 8px;
+  top: -16px;
+}
+
+.mario-cloud::after {
+  width: 18px;
+  height: 14px;
+  left: 36px;
+  top: -10px;
+}
+
+.mario-cloud--small {
+  transform: scale(0.82);
+  transform-origin: top left;
+}
+
+.mario-blocks {
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  top: 32%;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  animation: marioScroll 16s linear infinite;
+}
+
+.mario-block {
+  width: 28px;
+  height: 28px;
+  border: 2px solid #2f2d2a;
+  background: #d8682e;
+  box-shadow: 3px 3px 0 #1f1d1a;
+}
+
+.mario-block--question {
+  background: #f4b23f;
+  animation: marioBump 1.2s steps(2, end) infinite;
+}
+
+.mario-hills {
+  position: absolute;
+  left: -20%;
+  right: -20%;
+  bottom: 90px;
+  height: 96px;
+  background:
+    radial-gradient(circle at 30px 96px, #6daa52 58px, transparent 59px),
+    radial-gradient(circle at 160px 96px, #7bbc5f 74px, transparent 75px),
+    radial-gradient(circle at 320px 96px, #6daa52 58px, transparent 59px),
+    radial-gradient(circle at 460px 96px, #7bbc5f 74px, transparent 75px),
+    radial-gradient(circle at 620px 96px, #6daa52 58px, transparent 59px),
+    radial-gradient(circle at 760px 96px, #7bbc5f 74px, transparent 75px);
+  background-repeat: repeat-x;
+  background-size: 820px 96px;
+  animation: marioScroll 18s linear infinite;
+}
+
+.mario-ground {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 72px;
+  border-top: 2px solid #2f2d2a;
+  background:
+    repeating-linear-gradient(
+      to right,
+      #b67c45 0,
+      #b67c45 20px,
+      #cf965a 20px,
+      #cf965a 40px
+    );
+  animation: marioScroll 3.2s linear infinite;
+}
+
+.mario-runner {
+  position: absolute;
+  left: -36px;
+  bottom: 72px;
+  width: 28px;
+  height: 34px;
+  border: 2px solid #1f1d1a;
+  background:
+    linear-gradient(to bottom, #d8682e 0 35%, #2f65c9 35% 75%, #1f1d1a 75% 100%);
+  box-shadow: 3px 3px 0 #1f1d1a;
+  animation: marioRun 11s linear infinite, marioJump 0.8s steps(2, end) infinite;
+}
+
+@keyframes marioScroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-240px);
+  }
+}
+
+@keyframes marioRun {
+  0% {
+    left: -10%;
+  }
+  100% {
+    left: 110%;
+  }
+}
+
+@keyframes marioJump {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+@keyframes marioBump {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@media (max-width: 768px) {
+  .mario-bg {
+    opacity: 0.22;
+  }
+
+  .mario-hills {
+    bottom: 72px;
+    height: 74px;
+    background-size: 640px 74px;
+  }
+
+  .mario-ground {
+    height: 56px;
+  }
+
+  .mario-runner {
+    bottom: 56px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mario-cloud-layer,
+  .mario-blocks,
+  .mario-hills,
+  .mario-ground,
+  .mario-runner,
+  .mario-block--question {
+    animation: none !important;
+  }
 }
