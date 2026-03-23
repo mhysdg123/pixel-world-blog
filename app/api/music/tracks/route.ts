@@ -1,6 +1,7 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
 import { NextResponse } from "next/server";
+import { fallbackAudioTracks } from "@/data/fallback-audio";
 import type { LocalAudioTrack } from "@/types/blog";
 
 const PLAYABLE_EXT = new Set([".mp3", ".wav", ".ogg", ".m4a", ".flac"]);
@@ -22,8 +23,12 @@ export async function GET() {
         url: `/music/${encodeURIComponent(name)}`,
       }));
 
-    return NextResponse.json({ tracks });
+    if (!tracks.length) {
+      return NextResponse.json({ tracks: fallbackAudioTracks, source: "demo" });
+    }
+
+    return NextResponse.json({ tracks, source: "local" });
   } catch {
-    return NextResponse.json({ tracks: [] });
+    return NextResponse.json({ tracks: fallbackAudioTracks, source: "demo" });
   }
 }

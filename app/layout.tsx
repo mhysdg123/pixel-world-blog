@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Sans, Press_Start_2P, ZCOOL_QingKe_HuangYou } from "next/font/google";
 import type { ReactNode } from "react";
+import { LanguageProvider } from "@/components/LanguageProvider";
 import { MarioBackdrop } from "@/components/MarioBackdrop";
 import { MusicWidget } from "@/components/MusicWidget";
 import "./globals.css";
@@ -35,9 +36,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body
         className={`${pixel.variable} ${body.variable} ${cn.variable} relative overflow-x-hidden bg-paper font-body text-ink antialiased`}
       >
-        <MarioBackdrop />
-        <div className="relative z-10">{children}</div>
-        <MusicWidget />
+        <LanguageProvider>
+          <MarioBackdrop />
+          <div className="relative z-10">{children}</div>
+          <MusicWidget />
+        </LanguageProvider>
       </body>
     </html>
   );
