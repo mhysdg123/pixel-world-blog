@@ -2,6 +2,7 @@ import Image from "next/image";
 
 type Profile = {
   name: string;
+  avatar?: string;
   bio: string;
   intro: string;
   tags: string[];
@@ -12,7 +13,7 @@ export function ProfileCard({ profile }: { profile: Profile }) {
     <aside id="about" className="pixel-panel h-fit rounded-pixel p-4 sm:p-5">
       <div className="relative overflow-hidden rounded-pixel border-2 border-line bg-paper">
         <Image
-          src="/avatar-user.jpg"
+          src={profile.avatar ?? "/avatar-user.jpg"}
           alt="Profile avatar"
           width={500}
           height={500}
