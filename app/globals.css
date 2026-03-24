@@ -21,6 +21,26 @@ body {
   background-size: 14px 14px, 100% 100%;
 }
 
+body.lang-zh {
+  font-family:
+    var(--font-cn),
+    "PingFang SC",
+    "Microsoft YaHei",
+    "Noto Sans CJK SC",
+    sans-serif;
+}
+
+body.lang-zh .font-pixel {
+  font-family:
+    var(--font-cn),
+    "PingFang SC",
+    "Microsoft YaHei",
+    "Noto Sans CJK SC",
+    sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: none;
+}
+
 ::selection {
   color: #fffaf0;
   background: #2f65c9;

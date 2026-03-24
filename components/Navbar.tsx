@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { useLanguage } from "@/components/LanguageProvider";
 import { Button } from "@/components/ui/Button";
 import { profile } from "@/data/profile";
@@ -16,32 +17,14 @@ const navItems = [
 export function Navbar() {
   const [contactOpen, setContactOpen] = useState(false);
   const { isChinese, toggleLanguage } = useLanguage();
+  const t = useTranslations("navbar");
 
-  const labels = useMemo(
-    () =>
-      isChinese
-        ? {
-            home: "\u9996\u9875",
-            photography: "\u6444\u5f71",
-            tool: "\u5de5\u5177",
-            music: "\u97f3\u4e50",
-            contact: "\u8054\u7cfb",
-            language: "EN",
-            github: "GitHub \u4e3b\u9875",
-            email: "\u90ae\u7bb1",
-          }
-        : {
-            home: "Home",
-            photography: "Photography",
-            tool: "Tool",
-            music: "Music",
-            contact: "Contact",
-            language: "\u4e2d\u6587",
-            github: "GitHub",
-            email: "Email",
-          },
-    [isChinese],
-  );
+  const labels = {
+    home: t("home"),
+    photography: t("photography"),
+    tool: t("tool"),
+    music: t("music"),
+  };
 
   return (
     <header className={`pixel-panel mt-6 rounded-pixel px-4 py-4 sm:px-5 ${isChinese ? "font-cn" : ""}`}>
@@ -73,7 +56,7 @@ export function Navbar() {
             onClick={toggleLanguage}
             className={isChinese ? "font-cn text-xs normal-case tracking-[0.08em]" : "text-[9px]"}
           >
-            {labels.language}
+            {t("languageSwitch")}
           </Button>
 
           <Button
@@ -82,7 +65,7 @@ export function Navbar() {
             onClick={() => setContactOpen((prev) => !prev)}
             className={isChinese ? "font-cn text-xs normal-case tracking-[0.08em]" : ""}
           >
-            {labels.contact}
+            {t("contact")}
           </Button>
 
           {contactOpen ? (
@@ -94,13 +77,13 @@ export function Navbar() {
                   rel="noreferrer"
                   className="block text-mute transition-colors hover:text-ink"
                 >
-                  {labels.github}: {profile.github.replace("https://", "")}
+                  {t("github")}: {profile.github.replace("https://", "")}
                 </a>
                 <a
                   href={`mailto:${profile.email}`}
                   className="block text-mute transition-colors hover:text-ink"
                 >
-                  {labels.email}: {profile.email}
+                  {t("email")}: {profile.email}
                 </a>
               </div>
             </div>
@@ -122,4 +105,3 @@ export function Navbar() {
     </header>
   );
 }
-

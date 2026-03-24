@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
+import { useLanguage } from "@/components/LanguageProvider";
 import { posts as seedPosts } from "@/data/posts";
 import { loadPostsFromStorage } from "@/lib/posts-store";
 import type { BlogPost } from "@/types/blog";
@@ -10,6 +12,8 @@ import type { BlogPost } from "@/types/blog";
 export default function PostDetailPage() {
   const params = useParams<{ slug: string }>();
   const slug = decodeURIComponent(params.slug);
+  const { isChinese } = useLanguage();
+  const t = useTranslations("postDetail");
 
   const [allPosts, setAllPosts] = useState<BlogPost[]>(seedPosts);
 
@@ -21,46 +25,51 @@ export default function PostDetailPage() {
     return () => window.removeEventListener("bobo-posts-updated", syncPosts);
   }, []);
 
-  const post = useMemo(
-    () => allPosts.find((item) => item.slug === slug),
-    [allPosts, slug]
-  );
+  const post = useMemo(() => allPosts.find((item) => item.slug === slug), [allPosts, slug]);
 
   if (!post) {
     return (
       <main className="paper-container py-8">
         <article className="pixel-panel rounded-pixel p-6">
-          <p className="text-sm text-mute">Post not found.</p>
+          <p className="text-sm text-mute">{t("notFound")}</p>
           <Link
             href="/"
             className="mt-4 inline-flex rounded-pixel border-2 border-line bg-paper px-4 py-2 font-pixel text-[10px] uppercase tracking-[0.12em] hover:-translate-y-[2px] hover:shadow-pixel"
           >
-            Back Home
+            {t("backHome")}
           </Link>
         </article>
       </main>
     );
   }
 
-  const paragraphs = post.content
+  const title = isChinese ? post.titleZh ?? post.title : post.title;
+  const category = isChinese ? post.categoryZh ?? post.category : post.category;
+  const content = isChinese ? post.contentZh ?? post.content : post.content;
+  const date = isChinese ? post.dateZh ?? post.date : post.date;
+  const readTime = isChinese ? post.readTimeZh ?? post.readTime : post.readTime;
+
+  const paragraphs = content
     .split(/\n\s*\n/g)
     .map((item) => item.trim())
     .filter(Boolean);
 
+  const updatedText = post.updatedAt
+    ? new Date(post.updatedAt).toLocaleString(isChinese ? "zh-CN" : "en-US")
+    : "";
+
   return (
     <main className="paper-container py-8">
       <article className="pixel-panel rounded-pixel p-5 sm:p-7">
-        <p className="font-pixel text-[10px] uppercase tracking-[0.15em] text-ember">
-          {post.category}
-        </p>
+        <p className="font-pixel text-[10px] uppercase tracking-[0.15em] text-ember">{category}</p>
 
         <h1 className="mt-4 font-pixel text-[16px] uppercase leading-relaxed tracking-[0.12em] sm:text-[20px]">
-          {post.title}
+          {title}
         </h1>
 
         <p className="mt-3 text-sm text-mute">
-          {post.date} / {post.readTime}
-          {post.updatedAt ? ` / updated ${new Date(post.updatedAt).toLocaleString()}` : ""}
+          {date} / {readTime}
+          {updatedText ? ` / ${t("updated")} ${updatedText}` : ""}
         </p>
 
         <div className="mt-6 space-y-4 text-[15px] leading-7 text-mute">
@@ -73,7 +82,7 @@ export default function PostDetailPage() {
           href="/"
           className="mt-8 inline-flex rounded-pixel border-2 border-line bg-paper px-4 py-2 font-pixel text-[10px] uppercase tracking-[0.12em] hover:-translate-y-[2px] hover:shadow-pixel"
         >
-          Back Home
+          {t("backHome")}
         </Link>
       </article>
     </main>

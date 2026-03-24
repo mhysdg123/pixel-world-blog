@@ -8,6 +8,7 @@ import {
   useState,
   type PointerEvent as ReactPointerEvent,
 } from "react";
+import { useTranslations } from "next-intl";
 import { useLanguage } from "@/components/LanguageProvider";
 import type { LocalAudioTrack } from "@/types/blog";
 
@@ -62,49 +63,9 @@ export function MusicWidget() {
   const dragState = useRef({ active: false, offsetX: 0, offsetY: 0 });
 
   const { isChinese, toggleLanguage } = useLanguage();
+  const t = useTranslations("musicWidget");
 
-  const currentTrack = useMemo(
-    () => recommendedTracks[currentIndex],
-    [recommendedTracks, currentIndex],
-  );
-
-  const copy = useMemo(
-    () =>
-      isChinese
-        ? {
-            open: "\u97f3\u4e50",
-            title: "BOBO \u64ad\u653e\u5668",
-            close: "\u6536\u8d77",
-            loading: "\u6b63\u5728\u52a0\u8f7d\u6b4c\u66f2...",
-            nowPlaying: "\u6b63\u5728\u64ad\u653e",
-            prev: "\u4e0a\u4e00\u9996",
-            next: "\u4e0b\u4e00\u9996",
-            shuffle: "\u518d\u63a8\u8350 5 \u9996",
-            recommended: "\u672c\u6b21\u968f\u673a\u63a8\u8350",
-            sourceLocal: "\u672c\u5730\u97f3\u4e50\u5e93",
-            sourceDemo: "\u6f14\u793a\u97f3\u6e90",
-            emptyTitle: "\u5f53\u524d\u6682\u65e0\u53ef\u7528\u97f3\u9891",
-            emptyHint: "\u7a0d\u540e\u5237\u65b0\u9875\u9762\u518d\u8bd5\u4e00\u6b21\u3002",
-            language: "EN",
-          }
-        : {
-            open: "Music",
-            title: "BOBO Player",
-            close: "Close",
-            loading: "Loading tracks...",
-            nowPlaying: "Now Playing",
-            prev: "Prev",
-            next: "Next",
-            shuffle: "Shuffle 5",
-            recommended: "Recommended Picks",
-            sourceLocal: "Local Library",
-            sourceDemo: "Demo Source",
-            emptyTitle: "No tracks available right now.",
-            emptyHint: "Try refreshing this page in a moment.",
-            language: "\u4e2d\u6587",
-          },
-    [isChinese],
-  );
+  const currentTrack = useMemo(() => recommendedTracks[currentIndex], [recommendedTracks, currentIndex]);
 
   const refreshRecommendations = useCallback(() => {
     if (!tracks.length) {
@@ -261,7 +222,7 @@ export function MusicWidget() {
           isChinese ? "font-cn text-sm tracking-[0.04em]" : "font-pixel text-[10px] uppercase tracking-[0.12em]"
         }`}
       >
-        {copy.open}
+        {t("open")}
       </button>
     );
   }
@@ -277,7 +238,7 @@ export function MusicWidget() {
         className="flex cursor-move items-center justify-between border-b-2 border-line bg-paper px-3 py-2"
       >
         <p className={isChinese ? "text-sm tracking-[0.04em] text-ink" : "font-pixel text-[10px] uppercase tracking-[0.12em] text-ink"}>
-          {copy.title}
+          {t("title")}
         </p>
 
         <div className="flex items-center gap-2">
@@ -286,31 +247,31 @@ export function MusicWidget() {
             onClick={toggleLanguage}
             className={`pixel-tag px-2 py-1 ${isChinese ? "text-xs" : "text-[9px]"}`}
           >
-            {copy.language}
+            {t("language")}
           </button>
           <button
             type="button"
             onClick={() => setOpen(false)}
             className={`pixel-tag px-2 py-1 ${isChinese ? "text-xs" : "text-[9px]"}`}
           >
-            {copy.close}
+            {t("close")}
           </button>
         </div>
       </div>
 
       <div className="space-y-3 p-3">
-        {loading ? <p className="text-sm text-mute">{copy.loading}</p> : null}
+        {loading ? <p className="text-sm text-mute">{t("loading")}</p> : null}
 
         {!loading && currentTrack ? (
           <>
             <div className="rounded-pixel border-2 border-line bg-paper p-2">
               <p className={isChinese ? "text-sm tracking-[0.04em] text-ink" : "font-pixel text-[10px] uppercase tracking-[0.12em] text-ink"}>
-                {copy.nowPlaying}
+                {t("nowPlaying")}
               </p>
               <p className="mt-1 line-clamp-1 text-sm text-ink">{currentTrack.title}</p>
               <p className="mt-1 line-clamp-1 text-xs text-mute">{currentTrack.filename}</p>
               <p className="mt-1 text-xs text-mute">
-                {trackSource === "local" ? copy.sourceLocal : copy.sourceDemo}
+                {trackSource === "local" ? t("sourceLocal") : t("sourceDemo")}
               </p>
             </div>
 
@@ -322,26 +283,26 @@ export function MusicWidget() {
                 onClick={prevTrack}
                 className={`pixel-tag px-3 py-1 ${isChinese ? "text-xs" : "text-[9px]"}`}
               >
-                {copy.prev}
+                {t("prev")}
               </button>
               <button
                 type="button"
                 onClick={nextTrack}
                 className={`pixel-tag px-3 py-1 ${isChinese ? "text-xs" : "text-[9px]"}`}
               >
-                {copy.next}
+                {t("next")}
               </button>
               <button
                 type="button"
                 onClick={refreshRecommendations}
                 className={`pixel-tag px-3 py-1 ${isChinese ? "text-xs" : "text-[9px]"}`}
               >
-                {copy.shuffle}
+                {t("shuffle")}
               </button>
             </div>
 
             <p className={isChinese ? "text-xs tracking-[0.05em] text-mute" : "font-pixel text-[9px] uppercase tracking-[0.12em] text-mute"}>
-              {copy.recommended} ({recommendedTracks.length})
+              {t("recommended")} ({recommendedTracks.length})
             </p>
 
             <div className="max-h-28 space-y-1 overflow-auto pr-1">
@@ -363,8 +324,8 @@ export function MusicWidget() {
 
         {!loading && !currentTrack ? (
           <div className="space-y-1 text-sm text-mute">
-            <p>{copy.emptyTitle}</p>
-            <p>{copy.emptyHint}</p>
+            <p>{t("emptyTitle")}</p>
+            <p>{t("emptyHint")}</p>
           </div>
         ) : null}
       </div>

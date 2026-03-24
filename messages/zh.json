@@ -1,0 +1,125 @@
+{
+  "navbar": {
+    "home": "\u9996\u9875",
+    "photography": "\u6444\u5f71",
+    "tool": "\u5de5\u5177",
+    "music": "\u97f3\u4e50",
+    "contact": "\u8054\u7cfb",
+    "languageSwitch": "EN",
+    "github": "GitHub \u4e3b\u9875",
+    "email": "\u90ae\u7bb1"
+  },
+  "footer": {
+    "tagline": "\u6bcf\u4e00\u7bc7\u90fd\u6162\u6162\u5199\uff0c\u4e00\u70b9\u70b9\u6784\u5efa\u3002",
+    "github": "GitHub \u4e3b\u9875",
+    "email": "\u90ae\u7bb1"
+  },
+  "hero": {
+    "badge": "\u6b22\u8fce\u6765\u5230\u6211\u7684\u7f51\u7edc\u89d2\u843d",
+    "writing": "\u5199\u4f5c",
+    "thinking": "\u601d\u8003",
+    "building": "\u6784\u5efa",
+    "description": "\u6211\u4f1a\u5199\u4ea7\u54c1\u3001\u4e92\u8054\u7f51\u6587\u5316\u548c\u5404\u79cd\u5c0f\u5b9e\u9a8c\u3002\u8fd9\u662f\u4e00\u4e2a\u628a\u8349\u7a3f\u53d8\u6210\u60f3\u6cd5\uff0c\u518d\u628a\u60f3\u6cd5\u505a\u6210\u771f\u6b63\u53ef\u7528\u4e4b\u7269\u7684\u5730\u65b9\u3002",
+    "start": "\u5f00\u59cb\u9605\u8bfb",
+    "about": "\u5173\u4e8e\u6211",
+    "footer": "+ \u732e\u7ed9\u65e7\u4e92\u8054\u7f51\u7075\u9b42\u7684\u5c0f\u50cf\u7d20\u5fc3"
+  },
+  "pixelCharacter": {
+    "tag": "8-bit \u6a21\u5f0f",
+    "caption": "\u72ec\u7acb\u5f00\u53d1\u8005\u5c0f\u50cf\u7d20\uff0c\u5df2\u51c6\u5907\u597d\u8fce\u63a5\u6df1\u591c\u7f16\u7801\u5192\u9669\u3002"
+  },
+  "postCard": {
+    "featuredTitle": "\u7cbe\u9009\u9605\u8bfb",
+    "featuredDesc": "\u4e00\u7bc7\u957f\u6587\u7b14\u8bb0\uff0c\u5305\u542b\u5b9e\u6218\u793a\u4f8b\u4e0e\u6784\u5efa\u8bb0\u5f55\u3002"
+  },
+  "profileCard": {
+    "avatarAlt": "\u5934\u50cf"
+  },
+  "latestPosts": {
+    "title": "\u6700\u65b0\u6587\u7ae0",
+    "subtitle": "\u53ef\u5728 Owner Studio \u5185\u76f4\u63a5\u64b0\u5199\u3001\u7f16\u8f91\u3001\u5220\u9664\u3002",
+    "ownerStudio": "Owner Studio",
+    "ownerPlaceholder": "owner code",
+    "unlock": "\u89e3\u9501",
+    "hideStudio": "\u9690\u85cf\u5de5\u4f5c\u53f0",
+    "openStudio": "\u6253\u5f00\u5de5\u4f5c\u53f0",
+    "newPost": "\u65b0\u5efa\u6587\u7ae0",
+    "resetSeed": "\u91cd\u7f6e\u79cd\u5b50",
+    "edit": "\u7f16\u8f91",
+    "delete": "\u5220\u9664",
+    "titlePlaceholder": "\u6807\u9898",
+    "slugPlaceholder": "Slug (\u53ef\u9009)",
+    "categoryPlaceholder": "\u5206\u7c7b",
+    "readTimePlaceholder": "\u9605\u8bfb\u65f6\u95f4",
+    "summaryPlaceholder": "\u6458\u8981",
+    "contentPlaceholder": "\u6b63\u6587\uff08\u652f\u6301\u7528\u7a7a\u884c\u5206\u6bb5\uff09",
+    "saveChanges": "\u4fdd\u5b58\u66f4\u6539",
+    "publishPost": "\u53d1\u5e03\u6587\u7ae0",
+    "errOwnerCode": "Owner code \u4e0d\u6b63\u786e\u3002",
+    "errTitle": "\u8bf7\u586b\u5199\u6807\u9898\u3002",
+    "errSummary": "\u8bf7\u586b\u5199\u6458\u8981\u3002",
+    "errContent": "\u8bf7\u586b\u5199\u6b63\u6587\u3002",
+    "errSlug": "Slug \u751f\u6210\u5931\u8d25\uff0c\u8bf7\u5728\u6807\u9898\u4e2d\u4f7f\u7528\u82f1\u6587\u5b57\u6bcd\u6216\u6570\u5b57\u3002",
+    "errSlugDuplicate": "Slug \u5df2\u5b58\u5728\uff0c\u8bf7\u66f4\u6362\u6807\u9898\u6216 Slug\u3002",
+    "confirmDelete": "\u786e\u8ba4\u5220\u9664\u6587\u7ae0\u300a{title}\u300b\u5417\uff1f",
+    "confirmReset": "\u786e\u5b9a\u91cd\u7f6e\u4e3a\u79cd\u5b50\u6587\u7ae0\u5417\uff1f\u8fd9\u4f1a\u8986\u76d6\u6d4f\u89c8\u5668\u672c\u5730\u4fee\u6539\u3002",
+    "defaultReadTime": "5 \u5206\u949f\u9605\u8bfb",
+    "defaultCategory": "\u968f\u7b14"
+  },
+  "musicWidget": {
+    "open": "\u97f3\u4e50",
+    "title": "BOBO \u64ad\u653e\u5668",
+    "close": "\u6536\u8d77",
+    "loading": "\u6b63\u5728\u52a0\u8f7d\u6b4c\u66f2...",
+    "nowPlaying": "\u6b63\u5728\u64ad\u653e",
+    "prev": "\u4e0a\u4e00\u9996",
+    "next": "\u4e0b\u4e00\u9996",
+    "shuffle": "\u518d\u63a8\u8350 5 \u9996",
+    "recommended": "\u672c\u6b21\u968f\u673a\u63a8\u8350",
+    "sourceLocal": "\u672c\u5730\u97f3\u4e50\u5e93",
+    "sourceDemo": "\u6f14\u793a\u97f3\u6e90",
+    "emptyTitle": "\u5f53\u524d\u6682\u65e0\u53ef\u7528\u97f3\u9891",
+    "emptyHint": "\u7a0d\u540e\u5237\u65b0\u9875\u9762\u518d\u8bd5\u4e00\u6b21\u3002",
+    "language": "EN"
+  },
+  "toolPage": {
+    "title": "Toolbox",
+    "subtitle": "\u6211\u4e3a\u5199\u4f5c\u3001\u89c4\u5212\u548c\u6267\u884c\u6240\u505a\u7684\u5c0f\u5de5\u5177\uff0c\u7528\u6765\u51cf\u5c11\u963b\u529b\u3002",
+    "howToUse": "\u4f7f\u7528\u65b9\u5f0f\uff1a",
+    "openTool": "\u6253\u5f00\u5de5\u5177",
+    "status": {
+      "public": "\u516c\u5f00",
+      "beta": "\u6d4b\u8bd5",
+      "private": "\u79c1\u6709"
+    }
+  },
+  "musicPage": {
+    "title": "Music Lab",
+    "subtitle": "\u4f7f\u7528\u60ac\u6d6e\u97f3\u4e50\u7ec4\u4ef6\u5373\u65f6\u64ad\u653e\u672c\u5730\u6b4c\u66f2\uff0c\u540c\u65f6\u83b7\u53d6\u65b0\u9c9c\u63a8\u8350\u3002",
+    "widgetStatus": "\u7ec4\u4ef6\u72b6\u6001",
+    "playableTracks": "\u7ec4\u4ef6\u53ef\u64ad\u653e\u66f2\u76ee",
+    "randomPicks": "\u6bcf\u6b21\u6253\u5f00\u968f\u673a\u63a8\u8350",
+    "songs": "\u9996",
+    "localLibrarySynced": "\u672c\u5730\u66f2\u5e93\u5df2\u540c\u6b65",
+    "tracks": "\u9996",
+    "localLibraryMissing": "\u6682\u672a\u68c0\u6d4b\u5230\u672c\u5730\u66f2\u5e93\uff0c\u6709\u6b4c\u66f2\u540e\u97f3\u4e50\u529f\u80fd\u4f1a\u81ea\u52a8\u51fa\u73b0\u3002",
+    "curatedLinks": "\u7cbe\u9009\u94fe\u63a5",
+    "vibe": "\u6c1b\u56f4",
+    "open": "\u6253\u5f00",
+    "source": {
+      "youtube": "YouTube",
+      "spotify": "Spotify",
+      "local": "\u672c\u5730"
+    }
+  },
+  "photographyPage": {
+    "title": "Photography",
+    "subtitle": "\u8bb0\u5f55\u65e5\u5e38\u62cd\u6444\u7684\u5b89\u9759\u89d2\u843d\uff0c\u6536\u96c6\u7eb9\u7406\u548c\u7247\u523b\u3002",
+    "placeholder": "\u76f8\u518c\u6a21\u5757\u6b63\u5728\u51c6\u5907\uff1a\u5305\u542b\u5bab\u683c\u76f8\u518c\u3001EXIF \u4fe1\u606f\u548c\u6bcf\u6708\u6444\u5f71\u7b14\u8bb0\u3002"
+  },
+  "postDetail": {
+    "notFound": "\u672a\u627e\u5230\u6587\u7ae0\u3002",
+    "backHome": "\u8fd4\u56de\u9996\u9875",
+    "updated": "\u66f4\u65b0\u4e8e"
+  }
+}

@@ -8,6 +8,9 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { NextIntlClientProvider } from "next-intl";
+import enMessages from "@/messages/en.json";
+import zhMessages from "@/messages/zh.json";
 
 export type AppLanguage = "en" | "zh";
 
@@ -24,6 +27,8 @@ const LanguageContext = createContext<LanguageContextValue | null>(null);
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguage] = useState<AppLanguage>("en");
+  const [timeZone, setTimeZone] = useState("UTC");
+  const messages = language === "zh" ? zhMessages : enMessages;
 
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -43,7 +48,20 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
     window.localStorage.setItem(LANG_KEY, language);
     document.documentElement.lang = language === "zh" ? "zh-CN" : "en";
+    document.body.classList.toggle("lang-zh", language === "zh");
+    document.body.classList.toggle("lang-en", language === "en");
   }, [language]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const detected = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    if (detected) {
+      setTimeZone(detected);
+    }
+  }, []);
 
   const value = useMemo<LanguageContextValue>(
     () => ({
@@ -55,7 +73,13 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     [language],
   );
 
-  return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
+  return (
+    <LanguageContext.Provider value={value}>
+      <NextIntlClientProvider locale={language} messages={messages} timeZone={timeZone}>
+        {children}
+      </NextIntlClientProvider>
+    </LanguageContext.Provider>
+  );
 }
 
 export function useLanguage() {
@@ -66,4 +90,3 @@ export function useLanguage() {
 
   return context;
 }
-

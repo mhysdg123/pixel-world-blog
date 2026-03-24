@@ -1,0 +1,125 @@
+{
+  "navbar": {
+    "home": "Home",
+    "photography": "Photography",
+    "tool": "Tool",
+    "music": "Music",
+    "contact": "Contact",
+    "languageSwitch": "\u4e2d\u6587",
+    "github": "GitHub",
+    "email": "Email"
+  },
+  "footer": {
+    "tagline": "Built one post at a time.",
+    "github": "GitHub",
+    "email": "Email"
+  },
+  "hero": {
+    "badge": "Welcome to my corner of the web",
+    "writing": "Writing",
+    "thinking": "Thinking",
+    "building": "Building",
+    "description": "I write about products, internet culture, and small experiments on the web. This is where drafts become ideas, and ideas become things people can actually use.",
+    "start": "Start Reading",
+    "about": "About Me",
+    "footer": "+ tiny pixel heart for old internet souls"
+  },
+  "pixelCharacter": {
+    "tag": "8-bit mode",
+    "caption": "Indie builder sprite, ready for late-night coding quests."
+  },
+  "postCard": {
+    "featuredTitle": "Featured Read",
+    "featuredDesc": "A long-form note with practical examples and build logs."
+  },
+  "profileCard": {
+    "avatarAlt": "Profile avatar"
+  },
+  "latestPosts": {
+    "title": "Latest Posts",
+    "subtitle": "Write, edit, and delete directly on-site in Owner Studio.",
+    "ownerStudio": "Owner Studio",
+    "ownerPlaceholder": "owner code",
+    "unlock": "unlock",
+    "hideStudio": "Hide Studio",
+    "openStudio": "Open Studio",
+    "newPost": "new post",
+    "resetSeed": "reset seed",
+    "edit": "edit",
+    "delete": "delete",
+    "titlePlaceholder": "Title",
+    "slugPlaceholder": "Slug (optional)",
+    "categoryPlaceholder": "Category",
+    "readTimePlaceholder": "Read time",
+    "summaryPlaceholder": "Summary",
+    "contentPlaceholder": "Post content (supports paragraph breaks with blank lines)",
+    "saveChanges": "save changes",
+    "publishPost": "publish post",
+    "errOwnerCode": "Owner code is incorrect.",
+    "errTitle": "Title is required.",
+    "errSummary": "Summary is required.",
+    "errContent": "Content is required.",
+    "errSlug": "Slug could not be generated. Use letters and numbers in title.",
+    "errSlugDuplicate": "Slug already exists. Use a different title or slug.",
+    "confirmDelete": "Delete post \"{title}\"?",
+    "confirmReset": "Reset to seed posts? This will overwrite browser-local edits.",
+    "defaultReadTime": "5 min read",
+    "defaultCategory": "Notes"
+  },
+  "musicWidget": {
+    "open": "Music",
+    "title": "BOBO Player",
+    "close": "Close",
+    "loading": "Loading tracks...",
+    "nowPlaying": "Now Playing",
+    "prev": "Prev",
+    "next": "Next",
+    "shuffle": "Shuffle 5",
+    "recommended": "Recommended Picks",
+    "sourceLocal": "Local Library",
+    "sourceDemo": "Demo Source",
+    "emptyTitle": "No tracks available right now.",
+    "emptyHint": "Try refreshing this page in a moment.",
+    "language": "\u4e2d\u6587"
+  },
+  "toolPage": {
+    "title": "Toolbox",
+    "subtitle": "Small tools I build to reduce friction in writing, planning, and execution.",
+    "howToUse": "How to use:",
+    "openTool": "Open tool",
+    "status": {
+      "public": "public",
+      "beta": "beta",
+      "private": "private"
+    }
+  },
+  "musicPage": {
+    "title": "Music Lab",
+    "subtitle": "Use the floating music widget to instantly play local songs and enjoy fresh recommendations.",
+    "widgetStatus": "Widget Status",
+    "playableTracks": "Playable tracks in widget",
+    "randomPicks": "Random picks per open",
+    "songs": "songs",
+    "localLibrarySynced": "Local library synced",
+    "tracks": "tracks",
+    "localLibraryMissing": "Local library not detected yet. Music features will appear automatically once songs are available.",
+    "curatedLinks": "Curated Links",
+    "vibe": "Vibe",
+    "open": "Open",
+    "source": {
+      "youtube": "youtube",
+      "spotify": "spotify",
+      "local": "local"
+    }
+  },
+  "photographyPage": {
+    "title": "Photography",
+    "subtitle": "A quiet wall for shots, textures, and moments from daily life.",
+    "placeholder": "Gallery module coming next: grid albums, EXIF details, and monthly photo notes."
+  },
+  "postDetail": {
+    "notFound": "Post not found.",
+    "backHome": "Back Home",
+    "updated": "updated"
+  }
+}

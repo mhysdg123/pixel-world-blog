@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
+import { useLanguage } from "@/components/LanguageProvider";
 import { PostCard } from "@/components/PostCard";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import {
@@ -18,8 +20,14 @@ import type { BlogPost } from "@/types/blog";
 const OWNER_CODE = process.env.NEXT_PUBLIC_OWNER_CODE ?? "bobo-2026";
 
 export function LatestPosts({ posts: seedPosts }: { posts: BlogPost[] }) {
+  const { isChinese } = useLanguage();
+  const t = useTranslations("latestPosts");
+
+  const defaultReadTime = t("defaultReadTime");
+  const defaultCategory = t("defaultCategory");
+
   const [posts, setPosts] = useState<BlogPost[]>(sortPosts(seedPosts));
-  const [draft, setDraft] = useState<BlogPost>(createEmptyPostDraft());
+  const [draft, setDraft] = useState<BlogPost>(() => createEmptyDraft(defaultReadTime, defaultCategory));
   const [editingId, setEditingId] = useState<string | null>(null);
   const [showStudio, setShowStudio] = useState(false);
   const [ownerCodeInput, setOwnerCodeInput] = useState("");
@@ -42,7 +50,7 @@ export function LatestPosts({ posts: seedPosts }: { posts: BlogPost[] }) {
 
   function unlockOwnerStudio() {
     if (ownerCodeInput.trim() !== OWNER_CODE) {
-      setError("Owner code is incorrect.");
+      setError(t("errOwnerCode"));
       return;
     }
 
@@ -54,7 +62,7 @@ export function LatestPosts({ posts: seedPosts }: { posts: BlogPost[] }) {
 
   function startCreate() {
     setEditingId(null);
-    setDraft(createEmptyPostDraft());
+    setDraft(createEmptyDraft(defaultReadTime, defaultCategory));
     setError("");
   }
 
@@ -63,35 +71,34 @@ export function LatestPosts({ posts: seedPosts }: { posts: BlogPost[] }) {
     setDraft(post);
     setError("");
   }
+
   function saveDraft() {
     if (!draft.title.trim()) {
-      setError("Title is required.");
+      setError(t("errTitle"));
       return;
     }
 
     if (!draft.summary.trim()) {
-      setError("Summary is required.");
+      setError(t("errSummary"));
       return;
     }
 
     if (!draft.content.trim()) {
-      setError("Content is required.");
+      setError(t("errContent"));
       return;
     }
 
     const generatedSlug = createSlug(draft.slug.trim() || draft.title);
 
     if (!generatedSlug) {
-      setError("Slug could not be generated. Use letters and numbers in title.");
+      setError(t("errSlug"));
       return;
     }
 
-    const duplicate = posts.find(
-      (item) => item.slug === generatedSlug && item.id !== editingId
-    );
+    const duplicate = posts.find((item) => item.slug === generatedSlug && item.id !== editingId);
 
     if (duplicate) {
-      setError("Slug already exists. Use a different title or slug.");
+      setError(t("errSlugDuplicate"));
       return;
     }
 
@@ -102,7 +109,7 @@ export function LatestPosts({ posts: seedPosts }: { posts: BlogPost[] }) {
       id: editingId ?? `post-${Date.now()}`,
       slug: generatedSlug,
       date: draft.date || formatReadableDate(),
-      readTime: draft.readTime || "5 min read",
+      readTime: draft.readTime || defaultReadTime,
       updatedAt: now,
     };
 
@@ -123,7 +130,8 @@ export function LatestPosts({ posts: seedPosts }: { posts: BlogPost[] }) {
       return;
     }
 
-    const confirmDelete = window.confirm(`Delete post "${target.title}"?`);
+    const localizedTitle = isChinese ? target.titleZh ?? target.title : target.title;
+    const confirmDelete = window.confirm(t("confirmDelete", { title: localizedTitle }));
     if (!confirmDelete) {
       return;
     }
@@ -138,9 +146,7 @@ export function LatestPosts({ posts: seedPosts }: { posts: BlogPost[] }) {
   }
 
   function resetAllPosts() {
-    const confirmReset = window.confirm(
-      "Reset to seed posts? This will overwrite browser-local edits."
-    );
+    const confirmReset = window.confirm(t("confirmReset"));
 
     if (!confirmReset) {
       return;
@@ -154,22 +160,17 @@ export function LatestPosts({ posts: seedPosts }: { posts: BlogPost[] }) {
   return (
     <section id="posts" className="pixel-panel rounded-pixel p-4 sm:p-5">
       <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
-        <SectionTitle
-          title="Latest Posts"
-          subtitle="Write, edit, and delete directly on-site in Owner Studio."
-        />
+        <SectionTitle title={t("title")} subtitle={t("subtitle")} />
 
         {!ownerUnlocked ? (
           <div className="rounded-pixel border-2 border-line bg-paper p-3">
-            <p className="font-pixel text-[9px] uppercase tracking-[0.12em] text-ink">
-              Owner Studio
-            </p>
+            <p className="font-pixel text-[9px] uppercase tracking-[0.12em] text-ink">{t("ownerStudio")}</p>
             <div className="mt-2 flex gap-2">
               <input
                 type="password"
                 value={ownerCodeInput}
                 onChange={(event) => setOwnerCodeInput(event.target.value)}
-                placeholder="owner code"
+                placeholder={t("ownerPlaceholder")}
                 className="w-28 rounded-pixel border-2 border-line bg-milk px-2 py-1 text-xs outline-none"
               />
               <button
@@ -177,7 +178,7 @@ export function LatestPosts({ posts: seedPosts }: { posts: BlogPost[] }) {
                 onClick={unlockOwnerStudio}
                 className="pixel-tag px-2 py-1 text-[9px]"
               >
-                unlock
+                {t("unlock")}
               </button>
             </div>
           </div>
@@ -187,7 +188,7 @@ export function LatestPosts({ posts: seedPosts }: { posts: BlogPost[] }) {
             onClick={() => setShowStudio((prev) => !prev)}
             className="pixel-tag px-3 py-2 text-[9px] hover:bg-white"
           >
-            {showStudio ? "Hide Studio" : "Open Studio"}
+            {showStudio ? t("hideStudio") : t("openStudio")}
           </button>
         )}
       </div>
@@ -202,40 +203,43 @@ export function LatestPosts({ posts: seedPosts }: { posts: BlogPost[] }) {
                 onClick={startCreate}
                 className="pixel-tag px-2 py-1 text-[9px] hover:bg-white"
               >
-                new post
+                {t("newPost")}
               </button>
               <button
                 type="button"
                 onClick={resetAllPosts}
                 className="pixel-tag px-2 py-1 text-[9px] hover:bg-white"
               >
-                reset seed
+                {t("resetSeed")}
               </button>
             </div>
 
             <div className="max-h-[360px] space-y-2 overflow-auto pr-1">
-              {posts.map((post) => (
-                <article key={post.id} className="rounded-pixel border-2 border-line bg-milk p-2">
-                  <p className="line-clamp-1 text-sm font-semibold text-ink">{post.title}</p>
-                  <p className="mt-1 text-xs text-mute">/{post.slug}</p>
-                  <div className="mt-2 flex gap-2">
-                    <button
-                      type="button"
-                      onClick={() => startEdit(post)}
-                      className="pixel-tag px-2 py-1 text-[9px] hover:bg-white"
-                    >
-                      edit
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => deletePost(post.id)}
-                      className="pixel-tag px-2 py-1 text-[9px] hover:bg-white"
-                    >
-                      delete
-                    </button>
-                  </div>
-                </article>
-              ))}
+              {posts.map((post) => {
+                const title = isChinese ? post.titleZh ?? post.title : post.title;
+                return (
+                  <article key={post.id} className="rounded-pixel border-2 border-line bg-milk p-2">
+                    <p className="line-clamp-1 text-sm font-semibold text-ink">{title}</p>
+                    <p className="mt-1 text-xs text-mute">/{post.slug}</p>
+                    <div className="mt-2 flex gap-2">
+                      <button
+                        type="button"
+                        onClick={() => startEdit(post)}
+                        className="pixel-tag px-2 py-1 text-[9px] hover:bg-white"
+                      >
+                        {t("edit")}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => deletePost(post.id)}
+                        className="pixel-tag px-2 py-1 text-[9px] hover:bg-white"
+                      >
+                        {t("delete")}
+                      </button>
+                    </div>
+                  </article>
+                );
+              })}
             </div>
           </div>
 
@@ -244,29 +248,25 @@ export function LatestPosts({ posts: seedPosts }: { posts: BlogPost[] }) {
               <input
                 value={draft.title}
                 onChange={(event) => setDraft((prev) => ({ ...prev, title: event.target.value }))}
-                placeholder="Title"
+                placeholder={t("titlePlaceholder")}
                 className="rounded-pixel border-2 border-line bg-milk px-3 py-2 text-sm outline-none"
               />
               <input
                 value={draft.slug}
                 onChange={(event) => setDraft((prev) => ({ ...prev, slug: event.target.value }))}
-                placeholder="Slug (optional)"
+                placeholder={t("slugPlaceholder")}
                 className="rounded-pixel border-2 border-line bg-milk px-3 py-2 text-sm outline-none"
               />
               <input
                 value={draft.category}
-                onChange={(event) =>
-                  setDraft((prev) => ({ ...prev, category: event.target.value }))
-                }
-                placeholder="Category"
+                onChange={(event) => setDraft((prev) => ({ ...prev, category: event.target.value }))}
+                placeholder={t("categoryPlaceholder")}
                 className="rounded-pixel border-2 border-line bg-milk px-3 py-2 text-sm outline-none"
               />
               <input
                 value={draft.readTime}
-                onChange={(event) =>
-                  setDraft((prev) => ({ ...prev, readTime: event.target.value }))
-                }
-                placeholder="Read time"
+                onChange={(event) => setDraft((prev) => ({ ...prev, readTime: event.target.value }))}
+                placeholder={t("readTimePlaceholder")}
                 className="rounded-pixel border-2 border-line bg-milk px-3 py-2 text-sm outline-none"
               />
             </div>
@@ -274,7 +274,7 @@ export function LatestPosts({ posts: seedPosts }: { posts: BlogPost[] }) {
             <textarea
               value={draft.summary}
               onChange={(event) => setDraft((prev) => ({ ...prev, summary: event.target.value }))}
-              placeholder="Summary"
+              placeholder={t("summaryPlaceholder")}
               rows={3}
               className="w-full rounded-pixel border-2 border-line bg-milk px-3 py-2 text-sm outline-none"
             />
@@ -282,7 +282,7 @@ export function LatestPosts({ posts: seedPosts }: { posts: BlogPost[] }) {
             <textarea
               value={draft.content}
               onChange={(event) => setDraft((prev) => ({ ...prev, content: event.target.value }))}
-              placeholder="Post content (supports paragraph breaks with blank lines)"
+              placeholder={t("contentPlaceholder")}
               rows={10}
               className="w-full rounded-pixel border-2 border-line bg-milk px-3 py-2 text-sm leading-6 outline-none"
             />
@@ -292,7 +292,7 @@ export function LatestPosts({ posts: seedPosts }: { posts: BlogPost[] }) {
               onClick={saveDraft}
               className="pixel-tag px-3 py-2 text-[9px] hover:bg-white"
             >
-              {editingId ? "save changes" : "publish post"}
+              {editingId ? t("saveChanges") : t("publishPost")}
             </button>
           </div>
         </div>
@@ -307,4 +307,12 @@ export function LatestPosts({ posts: seedPosts }: { posts: BlogPost[] }) {
       </div>
     </section>
   );
+}
+
+function createEmptyDraft(defaultReadTime: string, defaultCategory: string): BlogPost {
+  return {
+    ...createEmptyPostDraft(),
+    readTime: defaultReadTime,
+    category: defaultCategory,
+  };
 }

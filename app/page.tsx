@@ -12,7 +12,7 @@ export default function HomePage() {
     <main className="paper-container pb-10">
       <Navbar />
       <Hero />
-      <IdentityStrip items={profile.keywords} />
+      <IdentityStrip items={profile.keywords} zhItems={profile.keywordsZh} />
       <section className="mt-8 grid gap-6 lg:grid-cols-[300px,1fr]">
         <ProfileCard profile={profile} />
         <LatestPosts posts={posts} />
