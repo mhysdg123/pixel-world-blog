@@ -1,11 +1,12 @@
 {
   "navbar": {
     "home": "Home",
+    "write": "Write",
     "photography": "Photography",
     "tool": "Tool",
     "music": "Music",
     "contact": "Contact",
-    "languageSwitch": "\u4e2d\u6587",
+    "languageSwitch": "中文",
     "github": "GitHub",
     "email": "Email"
   },
@@ -81,7 +82,7 @@
     "sourceDemo": "Demo Source",
     "emptyTitle": "No tracks available right now.",
     "emptyHint": "Try refreshing this page in a moment.",
-    "language": "\u4e2d\u6587"
+    "language": "中文"
   },
   "toolPage": {
     "title": "Toolbox",

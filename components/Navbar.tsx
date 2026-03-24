@@ -9,6 +9,7 @@ import { profile } from "@/data/profile";
 
 const navItems = [
   { key: "home", href: "/" },
+  { key: "write", href: "/write" },
   { key: "photography", href: "/photography" },
   { key: "tool", href: "/tool" },
   { key: "music", href: "/music" },
@@ -21,6 +22,7 @@ export function Navbar() {
 
   const labels = {
     home: t("home"),
+    write: t("write"),
     photography: t("photography"),
     tool: t("tool"),
     music: t("music"),
