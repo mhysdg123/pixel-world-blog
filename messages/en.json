@@ -25,8 +25,9 @@
     "footer": "+ tiny pixel heart for old internet souls"
   },
   "pixelCharacter": {
-    "tag": "8-bit mode",
-    "caption": "Indie builder sprite, ready for late-night coding quests."
+    "tag": "Portrait",
+    "photoAlt": "Portrait photo",
+    "caption": "A real snapshot from my builder life."
   },
   "postCard": {
     "featuredTitle": "Featured Read",
