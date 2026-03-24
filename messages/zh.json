@@ -82,7 +82,8 @@
     "sourceDemo": "演示音源",
     "emptyTitle": "当前暂无可用音频",
     "emptyHint": "稍后刷新页面再试一次。",
-    "language": "EN"
+    "language": "EN",
+    "artistLabel": "??"
   },
   "toolPage": {
     "title": "Toolbox",

@@ -82,7 +82,8 @@
     "sourceDemo": "Demo Source",
     "emptyTitle": "No tracks available right now.",
     "emptyHint": "Try refreshing this page in a moment.",
-    "language": "中文"
+    "language": "中文",
+    "artistLabel": "Artist"
   },
   "toolPage": {
     "title": "Toolbox",

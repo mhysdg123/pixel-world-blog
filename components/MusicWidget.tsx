@@ -269,7 +269,9 @@ export function MusicWidget() {
                 {t("nowPlaying")}
               </p>
               <p className="mt-1 line-clamp-1 text-sm text-ink">{currentTrack.title}</p>
-              <p className="mt-1 line-clamp-1 text-xs text-mute">{currentTrack.filename}</p>
+              <p className="mt-1 line-clamp-1 text-xs text-mute">
+                {t("artistLabel")}: {currentTrack.artist}
+              </p>
               <p className="mt-1 text-xs text-mute">
                 {trackSource === "local" ? t("sourceLocal") : t("sourceDemo")}
               </p>
@@ -315,7 +317,7 @@ export function MusicWidget() {
                     index === currentIndex ? "border-line bg-paper text-ink" : "border-line/50 bg-milk text-mute"
                   }`}
                 >
-                  {track.title}
+                  {track.title} - {track.artist}
                 </button>
               ))}
             </div>

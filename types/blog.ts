@@ -19,6 +19,7 @@ export type BlogPost = {
 export type LocalAudioTrack = {
   id: string;
   title: string;
+  artist: string;
   url: string;
   filename: string;
 };
