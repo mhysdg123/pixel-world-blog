@@ -2,7 +2,7 @@ export const profile = {
   name: "BOBO",
   avatar: "/avatar.jpg",
   github: "https://github.com/mhysdg123",
-  email: "hello@bobo.world",
+  email: "1093857219@qq.com",
   intro: "Frontend engineer, internet gardener, and curious maker.",
   introZh: "\u524d\u7aef\u5de5\u7a0b\u5e08\u3001\u4e92\u8054\u7f51\u56ed\u4e01\uff0c\u4e5f\u662f\u4e00\u4e2a\u4fdd\u6301\u597d\u5947\u7684\u521b\u4f5c\u8005\u3002",
   bio: "I document what I learn while designing interfaces, lifting heavy things, and building tiny products that help people think clearer.",
