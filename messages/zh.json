@@ -83,7 +83,8 @@
     "emptyTitle": "当前暂无可用音频",
     "emptyHint": "稍后刷新页面再试一次。",
     "language": "EN",
-    "artistLabel": "歌手"
+    "artistLabel": "歌手",
+    "sourceRemote": "云端曲库"
   },
   "toolPage": {
     "title": "Toolbox",
@@ -113,6 +114,12 @@
       "youtube": "YouTube",
       "spotify": "Spotify",
       "local": "本地"
+    },
+    "trackSource": "曲库来源",
+    "librarySource": {
+      "local": "本地曲库",
+      "remote": "云端曲库",
+      "demo": "演示音源"
     }
   },
   "photographyPage": {

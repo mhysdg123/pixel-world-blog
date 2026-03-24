@@ -15,12 +15,15 @@ type LibraryInfo = {
   ncmCount: number;
 };
 
+type TrackSource = "local" | "demo" | "remote";
+
 export default function MusicPage() {
   const { isChinese } = useLanguage();
   const t = useTranslations("musicPage");
 
   const [localTracks, setLocalTracks] = useState<LocalAudioTrack[]>([]);
   const [libraryInfo, setLibraryInfo] = useState<LibraryInfo | null>(null);
+  const [trackSource, setTrackSource] = useState<TrackSource>("local");
 
   useEffect(() => {
     async function loadData() {
@@ -29,15 +32,26 @@ export default function MusicPage() {
         fetch("/api/music/library", { cache: "no-store" }),
       ]);
 
-      const tracksData = (await tracksRes.json()) as { tracks?: LocalAudioTrack[] };
+      const tracksData = (await tracksRes.json()) as {
+        tracks?: LocalAudioTrack[];
+        source?: TrackSource;
+      };
       const libraryData = (await libraryRes.json()) as LibraryInfo;
 
       setLocalTracks(tracksData.tracks ?? []);
+      setTrackSource(
+        tracksData.source === "remote"
+          ? "remote"
+          : tracksData.source === "demo"
+            ? "demo"
+            : "local",
+      );
       setLibraryInfo(libraryData);
     }
 
     loadData().catch(() => {
       setLocalTracks([]);
+      setTrackSource("demo");
       setLibraryInfo(null);
     });
   }, []);
@@ -52,6 +66,16 @@ export default function MusicPage() {
     return t("source.local");
   }
 
+  function librarySourceLabel(source: TrackSource) {
+    if (source === "remote") {
+      return t("librarySource.remote");
+    }
+    if (source === "demo") {
+      return t("librarySource.demo");
+    }
+    return t("librarySource.local");
+  }
+
   return (
     <main className="paper-container pb-10">
       <Navbar />
@@ -64,6 +88,10 @@ export default function MusicPage() {
 
           <p className="text-sm text-mute">
             {t("playableTracks")}: <span className="font-semibold text-ink">{localTracks.length}</span>
+          </p>
+
+          <p className="text-sm text-mute">
+            {t("trackSource")}: <span className="font-semibold text-ink">{librarySourceLabel(trackSource)}</span>
           </p>
 
           <p className="text-sm text-mute">

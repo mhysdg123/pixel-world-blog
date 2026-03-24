@@ -83,7 +83,8 @@
     "emptyTitle": "No tracks available right now.",
     "emptyHint": "Try refreshing this page in a moment.",
     "language": "中文",
-    "artistLabel": "Artist"
+    "artistLabel": "Artist",
+    "sourceRemote": "Cloud Library"
   },
   "toolPage": {
     "title": "Toolbox",
@@ -113,6 +114,12 @@
       "youtube": "youtube",
       "spotify": "spotify",
       "local": "local"
+    },
+    "trackSource": "Track source",
+    "librarySource": {
+      "local": "Local Library",
+      "remote": "Cloud Library",
+      "demo": "Demo Source"
     }
   },
   "photographyPage": {

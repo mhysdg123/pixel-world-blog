@@ -19,7 +19,7 @@ type Position = {
 
 type TracksPayload = {
   tracks?: LocalAudioTrack[];
-  source?: "local" | "demo";
+  source?: "local" | "demo" | "remote";
 };
 
 const POS_KEY = "bobo_music_widget_pos";
@@ -53,7 +53,7 @@ function clampPosition(pos: Position) {
 export function MusicWidget() {
   const [open, setOpen] = useState(true);
   const [tracks, setTracks] = useState<LocalAudioTrack[]>([]);
-  const [trackSource, setTrackSource] = useState<"local" | "demo">("local");
+  const [trackSource, setTrackSource] = useState<"local" | "demo" | "remote">("local");
   const [recommendedTracks, setRecommendedTracks] = useState<LocalAudioTrack[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [position, setPosition] = useState<Position>({ x: 24, y: 24 });
@@ -116,7 +116,9 @@ export function MusicWidget() {
         }
 
         setTracks(payload.tracks ?? []);
-        setTrackSource(payload.source === "demo" ? "demo" : "local");
+        setTrackSource(
+          payload.source === "remote" ? "remote" : payload.source === "demo" ? "demo" : "local",
+        );
       } catch {
         if (!mounted) {
           return;
@@ -273,7 +275,11 @@ export function MusicWidget() {
                 {t("artistLabel")}: {currentTrack.artist}
               </p>
               <p className="mt-1 text-xs text-mute">
-                {trackSource === "local" ? t("sourceLocal") : t("sourceDemo")}
+                {trackSource === "remote"
+                  ? t("sourceRemote")
+                  : trackSource === "local"
+                    ? t("sourceLocal")
+                    : t("sourceDemo")}
               </p>
             </div>
 
